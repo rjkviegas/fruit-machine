@@ -1,10 +1,15 @@
-from random import randint
+from random import choice
 
 def play_fruit_machine():
-    slots_dict = { 0: 'black', 1: 'white' }
+    slots = (
+        'black',
+        'white',
+        'green',
+        'yellow'
+    )
     return [
-        slots_dict[randint(0, 1)],
-        slots_dict[randint(0, 1)],
-        slots_dict[randint(0, 1)],
-        slots_dict[randint(0, 1)]
+        choice(slots),
+        choice(slots),
+        choice(slots),
+        choice(slots)
     ]
