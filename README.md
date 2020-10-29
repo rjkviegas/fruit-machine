@@ -10,8 +10,21 @@ If the colours in each slot are the same then the player wins the jackpot which 
 
 Implement a basic machine, along with the concept of a player who has a fixed amount of money to play the machine.
 
+## Test
+
+Clone repo
+```
+python3 -m pytest
+```
+
 ## Design Plan
 
 1. Display 4 colours randomly (data type: an array of strings)
 2. Win condition == all four colours match (recursive array element check)
 3. `player.play(fruit_machine)` pay out jackpot (fruit machine 'balance' added to Player 'balance') when win condition met
+
+## Input / Output
+For `play_fruit_machine`
+        Input                      Output      
+|---------------|---------------------------------------|
+|       ()      |  ['black', 'black', 'black', 'black'] |
