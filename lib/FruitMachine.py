@@ -15,5 +15,5 @@ class FruitMachine:
         )
     
     def is_winner(self, slots):
-        return True if slots in self.win_combs else False
+        return slots in self.win_combs
 
