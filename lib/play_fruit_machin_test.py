@@ -1,4 +1,4 @@
-from play_fruit_machine import play_fruit_machine
+from play_fruit_machine import play_fruit_machine, is_winner
 from unittest import mock
 
 @mock.patch("play_fruit_machine.choice", return_value='black', autospec=True)
@@ -36,3 +36,12 @@ def test_play_fruit_machine_returns_4_yellow(mock_choice):
         'yellow',
         'yellow'
     )
+
+def test_is_winner_when_slot_all_black():
+    all_black = (
+        'black',
+        'black',
+        'black',
+        'black'
+    )
+    assert is_winner(all_black) == True
