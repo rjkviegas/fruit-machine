@@ -15,9 +15,21 @@ def play_fruit_machine():
     )
 
 def is_winner(slots):
-    return slots == (
-        'black',
-        'black',
-        'black',
-        'black'
+    win_combs = (
+        (
+            'black',
+            'black',
+            'black',
+            'black'
+        ),
+        (
+            'white',
+            'white',
+            'white',
+            'white'
+        )
     )
+    if slots in win_combs:
+        return True
+    else:
+        return False

@@ -45,3 +45,12 @@ def test_is_winner_when_slot_all_black():
         'black'
     )
     assert is_winner(all_black) == True
+
+def test_is_winner_when_slot_all_white():
+    all_white = (
+        'white',
+        'white',
+        'white',
+        'white'
+    )
+    assert is_winner(all_white) == True
