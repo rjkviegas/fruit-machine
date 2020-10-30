@@ -54,3 +54,21 @@ def test_is_winner_when_slot_all_white():
         'white'
     )
     assert is_winner(all_white) == True
+
+def test_is_winner_when_slot_all_green():
+    all_green =  (
+        'green',
+        'green',
+        'green',
+        'green'
+    )
+    assert is_winner(all_green) == True
+
+def test_is_winner_when_slot_all_yellow():
+    all_yellow = (
+        'yellow',
+        'yellow',
+        'yellow',
+        'yellow'
+    )
+    assert is_winner(all_yellow) == True
