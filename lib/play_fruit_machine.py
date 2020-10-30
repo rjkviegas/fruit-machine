@@ -7,9 +7,9 @@ def play_fruit_machine():
         'green',
         'yellow'
     )
-    return [
+    return (
         choice(slots),
         choice(slots),
         choice(slots),
         choice(slots)
-    ]
+    )
