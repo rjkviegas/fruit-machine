@@ -29,7 +29,5 @@ def is_winner(slots):
             'white'
         )
     )
-    if slots in win_combs:
-        return True
-    else:
-        return False
+    return True if slots in win_combs else False
+
