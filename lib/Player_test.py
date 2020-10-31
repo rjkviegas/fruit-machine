@@ -1,6 +1,6 @@
 from Player import Player
 from FruitMachine import FruitMachine
-import random
+import pytest, random
 
 slot_options = ('test')
 fm_float = 100
@@ -35,3 +35,12 @@ def test_player_play_fruit_machine_lose(monkeypatch):
     player.play(fruit_machine)
     assert fruit_machine.balance == fm_float + fee
     assert player.balance == player_init_balance - fee
+
+def test_player_raise_insuffcient_funds_error():
+    with pytest.raises(Exception) as exexinfo:
+        player = Player(0)
+        fruit_machine = FruitMachine(slot_options, fm_float, fee)
+
+        player.play(fruit_machine)
+        assert str(exexinfo.value) == 'Insufficient balance to play'
+

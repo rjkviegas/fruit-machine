@@ -10,6 +10,9 @@ class Player:
             game.balance = 0
     
     def pay_for(self, game):
+        if (self.balance < game.fee):
+            raise Exception('Inufficient balance to play')
+
         self.balance -= game.fee
         game.balance += game.fee
 

@@ -14,7 +14,7 @@ class FruitMachine:
             random.choice(self.slots),
             random.choice(self.slots)
         )
-    
+
     def is_winner(self, slots):
         return slots.count(slots[0]) == 4
 
