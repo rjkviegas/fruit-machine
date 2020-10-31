@@ -11,8 +11,11 @@ class Player:
     
     def pay_for(self, game):
         if (self.balance < game.fee):
-            raise Exception('Inufficient balance to play')
+            raise InsufficientBalanceException('Insufficient balance to play')
 
         self.balance -= game.fee
         game.balance += game.fee
 
+class InsufficientBalanceException(ZeroDivisionError):
+	def __init__(self,arg):
+	    self.msg = arg

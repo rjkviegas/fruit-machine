@@ -37,10 +37,9 @@ def test_player_play_fruit_machine_lose(monkeypatch):
     assert player.balance == player_init_balance - fee
 
 def test_player_raise_insuffcient_funds_error():
-    with pytest.raises(Exception) as exexinfo:
+    with pytest.raises(ZeroDivisionError):
         player = Player(0)
         fruit_machine = FruitMachine(slot_options, fm_float, fee)
 
         player.play(fruit_machine)
-        assert str(exexinfo.value) == 'Insufficient balance to play'
 
