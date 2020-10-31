@@ -19,6 +19,6 @@ python3 -m pytest
 
 ## Design Plan
 
-1. Display 4 colours randomly (data type: an array of strings)
-2. Win condition == all four colours match (recursive array element check)
+1. Display 4 colours randomly selected
+2. Win condition == all four colours match 
 3. `player.play(fruit_machine)` pay out jackpot (fruit machine 'balance' added to Player 'balance') when win condition met
