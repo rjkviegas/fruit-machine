@@ -1,4 +1,4 @@
-from FruitMachine import FruitMachine
+from FruitMachine import FruitMachine, create_win_combs
 import random
 
 slot_opts = (
@@ -8,34 +8,15 @@ slot_opts = (
     'yellow'
 )
 
-win_combs = (
-    (
-        'black',
-        'black',
-        'black',
-        'black'
-    ),
-    (
-        'white',
-        'white',
-        'white',
-        'white'
-    ),
-    (
-        'green',
-        'green',
-        'green',
-        'green'
-    ),
-    (
-        'yellow',
-        'yellow',
-        'yellow',
-        'yellow'
+def test_create_win_combs():
+    assert create_win_combs(slot_opts) == (
+        ('black', 'black', 'black', 'black'),
+        ('white', 'white', 'white', 'white'),
+        ('green', 'green', 'green', 'green'),
+        ('yellow', 'yellow', 'yellow', 'yellow')
     )
-)
 
-fruit_machine = FruitMachine(slot_opts, win_combs)
+fruit_machine = FruitMachine(slot_opts)
 
 def test_play_returns_4_black(monkeypatch):
     def mockchoice(x):
