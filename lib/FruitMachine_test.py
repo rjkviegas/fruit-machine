@@ -8,7 +8,7 @@ slot_opts = (
     'yellow'
 )
 
-fruit_machine = FruitMachine(slot_opts)
+fruit_machine = FruitMachine(slot_opts, 100, 1)
 
 def test_play_returns_4_black(monkeypatch):
     def mockchoice(x):
