@@ -12,7 +12,7 @@ class Player:
     
     def play(self, game):
         self.pay_for(game)
-        if game.is_winner(game.play()):
+        if game.is_jackpot(game.play()):
             self.balance += game.balance
             game.balance = 0
     

@@ -17,7 +17,7 @@ def test_player_play_fruit_machine_win(monkeypatch):
     assert fruit_machine.balance == fm_float
     assert player.balance == player_init_balance
 
-    monkeypatch.setattr(fruit_machine, 'is_winner', always_win)
+    monkeypatch.setattr(fruit_machine, 'is_jackpot', always_win)
     player.play(fruit_machine)
     assert fruit_machine.balance == 0
     assert player.balance == player_init_balance + fm_float
@@ -31,7 +31,7 @@ def test_player_play_fruit_machine_lose(monkeypatch):
     assert fruit_machine.balance == fm_float
     assert player.balance == player_init_balance
 
-    monkeypatch.setattr(fruit_machine, 'is_winner', always_lose)
+    monkeypatch.setattr(fruit_machine, 'is_jackpot', always_lose)
     player.play(fruit_machine)
     assert fruit_machine.balance == fm_float + fee
     assert player.balance == player_init_balance - fee

@@ -107,12 +107,21 @@ def test_is_winner_when_each_slot_option_once():
     )
     assert fruit_machine.is_winner(one_each) == True
 
-def test_one_of_each():
+def test_is_one_of_each():
     one_each = (
         'black',
         'white',
         'green',
         'yellow'
     )
-    assert fruit_machine.one_of_each(one_each) == True
+    assert fruit_machine.is_one_of_each(one_each) == True
+
+def test_is_jackpot():
+    jackpot = (
+        'black',
+        'black',
+        'black',
+        'black'
+    )
+    assert fruit_machine.is_jackpot(jackpot) == True
 

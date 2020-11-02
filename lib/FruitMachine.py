@@ -19,13 +19,16 @@ class FruitMachine:
         )
 
     def is_winner(self, slots):
-        return slots.count(slots[0]) == 4 or self.one_of_each(slots)
+        return self.is_jackpot(slots) or self.is_one_of_each(slots)
+    
+    def is_jackpot(self, slots):
+        return slots.count(slots[0]) == 4
 
-    def one_of_each(self, slots):
+    def is_one_of_each(self, slots):
         def iter(self, slots, i):
             if i == len(slots) - 1:
-                return self.get_slots().count(slots[i]) == 1
-            elif self.get_slots().count(slots[i]) == 1:
+                return slots.count(slots[i]) == 1
+            elif slots.count(slots[i]) == 1:
                 return True and iter(self, slots, i + 1)
             else:
                 return False
