@@ -1,23 +1,47 @@
 class InsufficientBalance(ZeroDivisionError):
-	def __init__(self,arg):
-	    self.msg = arg
+	def __init__(self, msg):
+	    self.msg = msg
 
-class Player:
-    
-    def __init__(self, balance):
-        self.balance = balance
+class PrizeCalculator:
+    def __init__(self, aTurn, aPlayer, aGame):
+        self.turn = aTurn
+        self.player = aPlayer
+        self.game = aGame
+
+class JackpotCalculator(PrizeCalculator):
+    def payout_prize(self):
+        self.player.balance += self.game.get_balance()
+        self.game.balance = 0
+
+class HalfCurrBalanceCalculator(PrizeCalculator):
+    def payout_prize(self):
+        self.player.balance += self.game.get_balance() / 2
+        self.game.balance /= 2
+
+class Player:  
+    def __init__(self, aBalance):
+        self.balance = aBalance
     
     def get_balance(self):
         return self.balance
     
-    def play(self, game):
-        self.pay_for(game)
-        if game.is_jackpot(game.play()):
-            self.balance += game.balance
-            game.balance = 0
+    def play(self, aGame):
+        self.pay_for(aGame)
+        turn = aGame.play()
+        calculator = self.createPrizeCalculator(turn, self, aGame)
+        try:
+            calculator.payout_prize()
+        except AttributeError:
+            print('Sorry, no prize this time.')
     
-    def pay_for(self, game):
-        if self.get_balance() < game.fee:
+    def pay_for(self, aGame):
+        if self.get_balance() < aGame.fee:
             raise InsufficientBalance('Insufficient balance to play')
-        self.balance -= game.fee
-        game.balance += game.fee
+        self.balance -= aGame.fee
+        aGame.balance += aGame.fee
+
+    def createPrizeCalculator(self, aTurn, aPlayer, aGame):
+        if aGame.is_jackpot(aTurn):
+            return JackpotCalculator(aTurn, aPlayer, aGame)
+        elif aGame.is_one_of_each(aTurn):
+            return HalfCurrBalanceCalculator(aTurn, aPlayer, aGame)

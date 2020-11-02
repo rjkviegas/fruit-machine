@@ -1,7 +1,6 @@
 import random
 
 class FruitMachine:
-
     def __init__(self, slot_opts, balance, fee):
         self.slots = slot_opts
         self.balance = balance
@@ -9,6 +8,9 @@ class FruitMachine:
     
     def get_slots(self):
         return self.slots
+    
+    def get_balance(self):
+        return self.balance
 
     def play(self):
         return (
@@ -17,9 +19,6 @@ class FruitMachine:
             random.choice(self.get_slots()),
             random.choice(self.get_slots())
         )
-
-    def is_winner(self, slots):
-        return self.is_jackpot(slots) or self.is_one_of_each(slots)
     
     def is_jackpot(self, slots):
         return slots.count(slots[0]) == 4

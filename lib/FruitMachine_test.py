@@ -62,52 +62,43 @@ def test_play_returns_4_yellow(monkeypatch):
         'yellow'
     )
 
-def test_is_winner_when_slots_all_black():
+def test_is_jackpot_when_slots_all_black():
     all_black = (
         'black',
         'black',
         'black',
         'black'
     )
-    assert fruit_machine.is_winner(all_black) == True
+    assert fruit_machine.is_jackpot(all_black) == True
 
-def test_is_winner_when_slots_all_white():
+def test_is_jackpot_when_slots_all_white():
     all_white = (
         'white',
         'white',
         'white',
         'white'
     )
-    assert fruit_machine.is_winner(all_white) == True
+    assert fruit_machine.is_jackpot(all_white) == True
 
-def test_is_winner_when_slots_all_green():
+def test_is_jackpot_when_slots_all_green():
     all_green =  (
         'green',
         'green',
         'green',
         'green'
     )
-    assert fruit_machine.is_winner(all_green) == True
+    assert fruit_machine.is_jackpot(all_green) == True
 
-def test_is_winner_when_slots_all_yellow():
+def test_is_jackpot_when_slots_all_yellow():
     all_yellow = (
         'yellow',
         'yellow',
         'yellow',
         'yellow'
     )
-    assert fruit_machine.is_winner(all_yellow) == True
+    assert fruit_machine.is_jackpot(all_yellow) == True
 
-def test_is_winner_when_each_slot_option_once():
-    one_each = (
-        'black',
-        'white',
-        'green',
-        'yellow'
-    )
-    assert fruit_machine.is_winner(one_each) == True
-
-def test_is_one_of_each():
+def test_is_one_of_each_when_each_slot_option_once():
     one_each = (
         'black',
         'white',
@@ -116,7 +107,7 @@ def test_is_one_of_each():
     )
     assert fruit_machine.is_one_of_each(one_each) == True
 
-def test_is_jackpot():
+def test_is_jackpot_when_all_same():
     jackpot = (
         'black',
         'black',
