@@ -1,3 +1,7 @@
+class InsufficientBalance(ZeroDivisionError):
+	def __init__(self,arg):
+	    self.msg = arg
+
 class Player:
     
     def __init__(self, balance):
@@ -10,12 +14,7 @@ class Player:
             game.balance = 0
     
     def pay_for(self, game):
-        if (self.balance < game.fee):
-            raise InsufficientBalanceException('Insufficient balance to play')
-
+        if self.balance < game.fee:
+            raise InsufficientBalance('Insufficient balance to play')
         self.balance -= game.fee
         game.balance += game.fee
-
-class InsufficientBalanceException(ZeroDivisionError):
-	def __init__(self,arg):
-	    self.msg = arg

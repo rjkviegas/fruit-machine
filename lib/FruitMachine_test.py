@@ -97,3 +97,22 @@ def test_is_winner_when_slots_all_yellow():
         'yellow'
     )
     assert fruit_machine.is_winner(all_yellow) == True
+
+def test_is_winner_when_each_slot_option_once():
+    one_each = (
+        'black',
+        'white',
+        'green',
+        'yellow'
+    )
+    assert fruit_machine.is_winner(one_each) == True
+
+def test_one_of_each():
+    one_each = (
+        'black',
+        'white',
+        'green',
+        'yellow'
+    )
+    assert fruit_machine.one_of_each(one_each) == True
+

@@ -6,15 +6,28 @@ class FruitMachine:
         self.slots = slot_opts
         self.balance = balance
         self.fee = fee
+    
+    def get_slots(self):
+        return self.slots
 
     def play(self):
         return (
-            random.choice(self.slots),
-            random.choice(self.slots),
-            random.choice(self.slots),
-            random.choice(self.slots)
+            random.choice(self.get_slots()),
+            random.choice(self.get_slots()),
+            random.choice(self.get_slots()),
+            random.choice(self.get_slots())
         )
 
     def is_winner(self, slots):
-        return slots.count(slots[0]) == 4
+        return slots.count(slots[0]) == 4 or self.one_of_each(slots)
 
+    def one_of_each(self, slots):
+        def iter(self, slots, i):
+            if i == len(slots) - 1:
+                return self.get_slots().count(slots[i]) == 1
+            elif self.get_slots().count(slots[i]) == 1:
+                return True and iter(self, slots, i + 1)
+            else:
+                return False
+        return iter(self, slots, 0)
+            
