@@ -11,13 +11,19 @@ class FruitMachine:
     
     def get_balance(self):
         return self.balance
+    
+    def get_fee(self):
+        return self.fee
+    
+    def generate_slot(self):
+        return random.choice(self.get_slots())
 
     def play(self):
         return (
-            random.choice(self.get_slots()),
-            random.choice(self.get_slots()),
-            random.choice(self.get_slots()),
-            random.choice(self.get_slots())
+            self.generate_slot(),
+            self.generate_slot(),
+            self.generate_slot(),
+            self.generate_slot()
         )
     
     def is_jackpot(self, slots):
@@ -28,7 +34,7 @@ class FruitMachine:
             if i == len(slots) - 1:
                 return slots.count(slots[i]) == 1
             elif slots.count(slots[i]) == 1:
-                return True and iter(self, slots, i + 1)
+                return iter(self, slots, i + 1)
             else:
                 return False
         return iter(self, slots, 0)
