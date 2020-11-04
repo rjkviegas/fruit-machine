@@ -31,11 +31,17 @@ class FruitMachine:
 
     def is_one_of_each(self, slots):
         def iter(self, slots, i):
-            if i == len(slots) - 1:
-                return slots.count(slots[i]) == 1
-            elif slots.count(slots[i]) == 1:
+            if self.is_last_slot(slots, i):
+                return self.is_one_occurrence(slots, i)
+            elif self.is_one_occurrence(slots, i):
                 return iter(self, slots, i + 1)
             else:
                 return False
         return iter(self, slots, 0)
+    
+    def is_last_slot(self, slots, slots_index):
+        return slots_index + 1 == len(slots)
+    
+    def is_one_occurrence(self, slots, index):
+        return slots.count(slots[index]) == 1
             
