@@ -26,31 +26,31 @@ class FruitMachine:
             self.generate_slot()
         )
     
-    def is_jackpot(self, slots):
-        return slots.count(slots[0]) == len(slots)
+    def is_jackpot(self, aTurn):
+        return aTurn.count(aTurn[0]) == len(aTurn)
 
-    def is_one_of_each(self, slots):
-        def iter(self, slots, i):
-            if self.is_last_slot(slots, i):
-                return self.is_one_occurrence(slots, i)
-            elif self.is_one_occurrence(slots, i):
-                return iter(self, slots, i + 1)
+    def is_one_of_each(self, aTurn):
+        def iter(self, aTurn, i):
+            if self.is_last_slot(aTurn, i):
+                return self.is_one_occurrence(aTurn, i)
+            elif self.is_one_occurrence(aTurn, i):
+                return iter(self, aTurn, i + 1)
             else:
                 return False
-        return iter(self, slots, 0)
+        return iter(self, aTurn, 0)
     
-    def is_last_slot(self, slots, slots_index):
-        return slots_index + 1 == len(slots)
+    def is_last_slot(self, aTurn, index):
+        return index + 1 == len(aTurn)
     
-    def is_one_occurrence(self, slots, index):
-        return slots.count(slots[index]) == 1
+    def is_one_occurrence(self, aTurn, index):
+        return aTurn.count(aTurn[index]) == 1
     
-    def is_two_in_a_row(self, slots):
-        def iter(self, slots, i):
-            if self.is_last_slot(slots, i):
+    def is_two_in_a_row(self, aTurn):
+        def iter(self, aTurn, i):
+            if self.is_last_slot(aTurn, i):
                 return False
-            elif slots[i] == slots[i + 1]:
+            elif aTurn[i] == aTurn[i + 1]:
                 return True
             else:
-                return iter(self, slots, i + 1)
-        return iter(self, slots, 0)
+                return iter(self, aTurn, i + 1)
+        return iter(self, aTurn, 0)
