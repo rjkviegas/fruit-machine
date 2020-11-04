@@ -27,7 +27,7 @@ class FruitMachine:
         )
     
     def is_jackpot(self, slots):
-        return slots.count(slots[0]) == 4
+        return slots.count(slots[0]) == len(slots)
 
     def is_one_of_each(self, slots):
         def iter(self, slots, i):
