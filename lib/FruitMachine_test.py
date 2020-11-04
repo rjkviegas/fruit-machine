@@ -116,3 +116,12 @@ def test_is_jackpot_when_all_same():
     )
     assert fruit_machine.is_jackpot(jackpot) == True
 
+def test_is_two_in_a_row():
+    two_in_a_row = (
+        'green',
+        'yellow',
+        'black',
+        'black'
+    )
+    assert fruit_machine.is_two_in_a_row(two_in_a_row) == True
+

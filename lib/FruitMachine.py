@@ -44,4 +44,13 @@ class FruitMachine:
     
     def is_one_occurrence(self, slots, index):
         return slots.count(slots[index]) == 1
-            
+    
+    def is_two_in_a_row(self, slots):
+        def iter(self, slots, i):
+            if self.is_last_slot(slots, i):
+                return False
+            elif slots[i] == slots[i + 1]:
+                return True
+            else:
+                return iter(self, slots, i + 1)
+        return iter(self, slots, 0)

@@ -24,23 +24,34 @@ class Player:
         if aGame.is_jackpot(aTurn):
             return JackpotCalculator(aTurn, aPlayer, aGame)
         elif aGame.is_one_of_each(aTurn):
-            return HalfCurrBalanceCalculator(aTurn, aPlayer, aGame)
+            return OneOfEachCalculator(aTurn, aPlayer, aGame)
+        elif aGame.is_two_in_a_row(aTurn):
+            return TwoInARowCalculator(aTurn, aPlayer, aGame)
 
 class PrizeCalculator:
     def __init__(self, aTurn, aPlayer, aGame):
         self.turn = aTurn
         self.player = aPlayer
         self.game = aGame
+    
+    # def payout_prize(self):
+    #     self.player.balance += (self.game.get_fee() * 5)
+    #     self.game.balance -= (self.game.get_fee() * 5)
 
 class JackpotCalculator(PrizeCalculator):
     def payout_prize(self):
         self.player.balance += self.game.get_balance()
         self.game.balance = 0
 
-class HalfCurrBalanceCalculator(PrizeCalculator):
+class OneOfEachCalculator(PrizeCalculator):
     def payout_prize(self):
         self.player.balance += self.game.get_balance() / 2
         self.game.balance /= 2
+
+class TwoInARowCalculator(PrizeCalculator):
+    def payout_prize(self):
+        self.player.balance += (self.game.get_fee() * 5)
+        self.game.balance -= (self.game.get_fee() * 5)
 
 class InsufficientBalance(ZeroDivisionError):
 	def __init__(self, msg):
