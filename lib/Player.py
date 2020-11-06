@@ -1,57 +1,35 @@
+from PrizeCalculator import PrizeCalculator, JackpotCalculator
+from PrizeCalculator import OneOfEachCalculator, TwoInARowCalculator
+
 class Player:  
-    def __init__(self, aBalance):
-        self.balance = aBalance
+    def __init__(self, balance):
+        self.balance = balance
     
     def get_balance(self):
         return self.balance
     
-    def play(self, aGame):
-        self.pay_for(aGame)
-        turn = aGame.play()
-        calculator = self.createPrizeCalculator(turn, self, aGame)
+    def play(self, game):
+        self.pay_for(game)
+        turn = game.play()
+        calculator = self.createPrizeCalculator(turn, self, game)
         try:
             calculator.payout_prize()
         except AttributeError:
             print('Sorry, no prize this time.')
     
-    def pay_for(self, aGame):
-        if self.get_balance() < aGame.fee:
+    def pay_for(self, game):
+        if self.get_balance() < game.fee:
             raise InsufficientBalance('Insufficient balance to play')
-        self.balance -= aGame.get_fee()
-        aGame.balance += aGame.get_fee()
+        self.balance -= game.get_fee()
+        game.balance += game.get_fee()
 
-    def createPrizeCalculator(self, aTurn, aPlayer, aGame):
-        if aGame.is_jackpot(aTurn):
-            return JackpotCalculator(aTurn, aPlayer, aGame)
-        elif aGame.is_one_of_each(aTurn):
-            return OneOfEachCalculator(aTurn, aPlayer, aGame)
-        elif aGame.is_two_in_a_row(aTurn):
-            return TwoInARowCalculator(aTurn, aPlayer, aGame)
-
-class PrizeCalculator:
-    def __init__(self, aTurn, aPlayer, aGame):
-        self.turn = aTurn
-        self.player = aPlayer
-        self.game = aGame
-    
-    # def payout_prize(self):
-    #     self.player.balance += (self.game.get_fee() * 5)
-    #     self.game.balance -= (self.game.get_fee() * 5)
-
-class JackpotCalculator(PrizeCalculator):
-    def payout_prize(self):
-        self.player.balance += self.game.get_balance()
-        self.game.balance = 0
-
-class OneOfEachCalculator(PrizeCalculator):
-    def payout_prize(self):
-        self.player.balance += self.game.get_balance() / 2
-        self.game.balance /= 2
-
-class TwoInARowCalculator(PrizeCalculator):
-    def payout_prize(self):
-        self.player.balance += (self.game.get_fee() * 5)
-        self.game.balance -= (self.game.get_fee() * 5)
+    def createPrizeCalculator(self, turn, player, game):
+        if game.is_jackpot(turn):
+            return JackpotCalculator(turn, player, game)
+        elif game.is_one_of_each(turn):
+            return OneOfEachCalculator(turn, player, game)
+        elif game.is_two_in_a_row(turn):
+            return TwoInARowCalculator(turn, player, game)
 
 class InsufficientBalance(ZeroDivisionError):
 	def __init__(self, msg):

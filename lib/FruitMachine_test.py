@@ -1,4 +1,4 @@
-from FruitMachine import FruitMachine
+from FruitMachine import FruitMachine, Turn
 import random
 
 slot_opts = (
@@ -15,7 +15,7 @@ def test_play_returns_4_black(monkeypatch):
         return 'black'
 
     monkeypatch.setattr(random, 'choice', mockchoice)
-    x = fruit_machine.play()
+    x = Turn(slot_opts).get_slots()
     assert x == (
             'black',
             'black',
@@ -28,7 +28,7 @@ def test_play_returns_4_white(monkeypatch):
         return 'white'
 
     monkeypatch.setattr(random, 'choice', mockchoice)
-    x = fruit_machine.play()
+    x = Turn(slot_opts).get_slots()
     assert x == (
             'white',
             'white',
@@ -41,7 +41,7 @@ def test_play_returns_4_green(monkeypatch):
         return 'green'
 
     monkeypatch.setattr(random, 'choice', mockchoice)
-    x = fruit_machine.play()
+    x = Turn(slot_opts).get_slots()
     assert x == (
         'green',
         'green',
@@ -54,7 +54,7 @@ def test_play_returns_4_yellow(monkeypatch):
         return 'yellow'
 
     monkeypatch.setattr(random, 'choice', mockchoice)
-    x = fruit_machine.play()
+    x = Turn(slot_opts).get_slots()
     assert x == (
         'yellow',
         'yellow',
