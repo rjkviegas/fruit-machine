@@ -24,11 +24,11 @@ class Player:
         game.balance += game.get_fee()
 
     def createPrizeCalculator(self, turn, player, game):
-        if game.is_jackpot(turn):
+        if turn.is_jackpot():
             return JackpotCalculator(turn, player, game)
-        elif game.is_one_of_each(turn):
+        elif turn.is_one_of_each():
             return OneOfEachCalculator(turn, player, game)
-        elif game.is_two_in_a_row(turn):
+        elif turn.is_two_in_a_row():
             return TwoInARowCalculator(turn, player, game)
 
 class InsufficientBalance(ZeroDivisionError):

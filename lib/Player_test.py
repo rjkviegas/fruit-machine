@@ -1,5 +1,6 @@
 from Player import Player, InsufficientBalance
 from FruitMachine import FruitMachine
+from Turn import Turn
 import pytest, random
 
 slot_options = ('test')
@@ -7,27 +8,12 @@ fm_float = 100
 fee = 1
 player_init_balance = 5
 
-
-def test_player_play_fruit_machine_jackpot(monkeypatch):
-    def return_true(x):
-        return True
-
-    player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee)
-    assert fruit_machine.get_balance() == fm_float
-    assert player.get_balance() == player_init_balance
-
-    monkeypatch.setattr(fruit_machine, 'is_jackpot', return_true)
-    player.play(fruit_machine)
-    assert fruit_machine.get_balance() == 0
-    assert player.get_balance() == player_init_balance + fm_float
-
-def test_player_play_fruit_machine_lose(monkeypatch):
+def test_when_no_prize_won(monkeypatch):
     def return_none(x, y, z):
         return None
 
     player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee)
+    fruit_machine = FruitMachine(slot_options, fm_float, fee, Turn)
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
@@ -39,41 +25,58 @@ def test_player_play_fruit_machine_lose(monkeypatch):
 def test_player_raise_insuffcient_funds_error():
     with pytest.raises(InsufficientBalance):
         player = Player(0)
-        fruit_machine = FruitMachine(slot_options, fm_float, fee)
+        fruit_machine = FruitMachine(slot_options, fm_float, fee, Turn)
 
         player.play(fruit_machine)
 
-def test_player_play_fruit_machine_one_of_each(monkeypatch):
-    def return_true(x):
-        return True
-
-    def return_false(x):
-        return False
+def test_jackpot_payout(monkeypatch):
+    def return_black(x):
+        return 'black'
 
     player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee)
+    fruit_machine = FruitMachine(slot_options, fm_float, fee, Turn)
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
-    monkeypatch.setattr(fruit_machine, 'is_jackpot', return_false)
-    monkeypatch.setattr(fruit_machine, 'is_one_of_each', return_true)
+
+    monkeypatch.setattr(random, 'choice', return_black)
+    player.play(fruit_machine)
+    assert fruit_machine.get_balance() == 0
+    assert player.get_balance() == player_init_balance + fm_float
+
+def test_one_of_each_payout():
+    class MockTurn:
+        def __init__(self, x):
+            pass
+        def is_jackpot(self):
+            return False
+        def is_one_of_each(self):
+            return True
+
+    player = Player(player_init_balance)
+    fruit_machine = FruitMachine(slot_options, fm_float, fee, MockTurn)
+    assert fruit_machine.get_balance() == fm_float
+    assert player.get_balance() == player_init_balance
+
     player.play(fruit_machine)
     assert fruit_machine.get_balance() == (fm_float + fee) / 2
     assert player.get_balance() == player_init_balance - fee + ((fm_float + fee) / 2)
 
-def test_player_play_fruit_machine_two_in_a_row(monkeypatch):
-    def return_true(x):
-        return True
-
-    def return_false(x):
-        return False
+def test_two_in_a_row_payout():
+    class MockTurn:
+        def __init__(self, x):
+            pass
+        def is_jackpot(self):
+            return False
+        def is_one_of_each(self):
+            return False
+        def is_two_in_a_row(self):
+            return True
 
     player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee)
+    fruit_machine = FruitMachine(slot_options, fm_float, fee, MockTurn)
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
-    monkeypatch.setattr(fruit_machine, 'is_jackpot', return_false)
-    monkeypatch.setattr(fruit_machine, 'is_one_of_each', return_false)
-    monkeypatch.setattr(fruit_machine, 'is_two_in_a_row', return_true)
+
     player.play(fruit_machine)
     assert fruit_machine.get_balance() == (fm_float + fee) - (fee * 5)
     assert player.get_balance() == player_init_balance - fee + (fee * 5)  
