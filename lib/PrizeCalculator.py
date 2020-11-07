@@ -1,6 +1,6 @@
 class PrizeCalculator:
-    def __init__(self, aTurn, aPlayer, aGame):
-        self.turn = aTurn
+    def __init__(self, aFourReelsTurn, aPlayer, aGame):
+        self.turn = aFourReelsTurn
         self.player = aPlayer
         self.game = aGame
 

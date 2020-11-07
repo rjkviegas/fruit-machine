@@ -1,6 +1,6 @@
 import random
 
-class Turn:
+class FourReelsTurn:
     def __init__(self, slot_options):
         self.slots = (
             random.choice(slot_options),

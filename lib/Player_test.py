@@ -1,6 +1,6 @@
 from Player import Player, InsufficientBalance
 from FruitMachine import FruitMachine
-from Turn import Turn
+from FourReelsTurn import FourReelsTurn
 import pytest, random
 
 slot_options = ('test')
@@ -13,7 +13,7 @@ def test_when_no_prize_won(monkeypatch):
         return None
 
     player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee, Turn)
+    fruit_machine = FruitMachine(slot_options, fm_float, fee, FourReelsTurn)
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
@@ -25,7 +25,7 @@ def test_when_no_prize_won(monkeypatch):
 def test_player_raise_insuffcient_funds_error():
     with pytest.raises(InsufficientBalance):
         player = Player(0)
-        fruit_machine = FruitMachine(slot_options, fm_float, fee, Turn)
+        fruit_machine = FruitMachine(slot_options, fm_float, fee, FourReelsTurn)
 
         player.play(fruit_machine)
 
@@ -34,7 +34,7 @@ def test_jackpot_payout(monkeypatch):
         return 'black'
 
     player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee, Turn)
+    fruit_machine = FruitMachine(slot_options, fm_float, fee, FourReelsTurn)
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
@@ -44,7 +44,7 @@ def test_jackpot_payout(monkeypatch):
     assert player.get_balance() == player_init_balance + fm_float
 
 def test_one_of_each_payout():
-    class MockTurn:
+    class MockFourReelsTurn:
         def __init__(self, x):
             pass
         def is_jackpot(self):
@@ -53,7 +53,7 @@ def test_one_of_each_payout():
             return True
 
     player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee, MockTurn)
+    fruit_machine = FruitMachine(slot_options, fm_float, fee, MockFourReelsTurn)
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
@@ -62,7 +62,7 @@ def test_one_of_each_payout():
     assert player.get_balance() == player_init_balance - fee + ((fm_float + fee) / 2)
 
 def test_two_in_a_row_payout():
-    class MockTurn:
+    class MockFourReelsTurn:
         def __init__(self, x):
             pass
         def is_jackpot(self):
@@ -73,7 +73,7 @@ def test_two_in_a_row_payout():
             return True
 
     player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee, MockTurn)
+    fruit_machine = FruitMachine(slot_options, fm_float, fee, MockFourReelsTurn)
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
