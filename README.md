@@ -1,7 +1,7 @@
 # Fruit Machine
 
 ## Specification
-
+```
 We are going to create a virtual fruit machine. To make things easier instead of symbols we are going to use colours: black, white, green, yellow.
 
 Each time a player plays our fruit machine we display four 'slots' each with a randomly selected colour in each slot.
@@ -9,7 +9,7 @@ Each time a player plays our fruit machine we display four 'slots' each with a r
 If the colours in each slot are the same then the player wins the jackpot which is all of the money that is currently in the machine.
 
 Implement a basic machine, along with the concept of a player who has a fixed amount of money to play the machine.
-
+```
 ## Test
 
 Clone repo
@@ -22,7 +22,8 @@ python3 -m pytest --cov lib/
 - Overall I have enjoyed my first experience using Python
 - Enjoyed refactoring and using polymorphism for the PrizeCalculator
 - Pleased with overall code coverage of 98%
-- Enjoyed using recursive function calls for checking the turn win conditions
+- Enjoyed using recursive calls for checking the win conditions
+- Enjoyed using `super` in constructor in FourReelsTurn class
 
 ## Design Plan
 
