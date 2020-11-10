@@ -45,7 +45,7 @@ def test_jackpot_payout(monkeypatch):
 
 def test_one_of_each_payout():
     class MockFourReelsTurn:
-        def __init__(self, x):
+        def __init__(self, x, y):
             pass
         def is_jackpot(self):
             return False
@@ -63,7 +63,7 @@ def test_one_of_each_payout():
 
 def test_two_in_a_row_payout():
     class MockFourReelsTurn:
-        def __init__(self, x):
+        def __init__(self, x, y):
             pass
         def is_jackpot(self):
             return False
