@@ -1,8 +1,8 @@
 import random
 
 class FruitMachineTurn:
-    def __init__(self, slot_options, num_of_reels):
-        self.num_of_reels = num_of_reels
+    def __init__(self, slot_options):
+        self.num_of_reels = len(slot_options)
         self.slots = self.generate_slots(slot_options, self.num_of_reels)
 
     def generate_slots(self, slot_options, num_of_reels):
@@ -24,6 +24,10 @@ class FruitMachineTurn:
         return self.get_slots().count(self.get_slots()[index]) == 1
 
 class FourReelsTurn(FruitMachineTurn):
+    def __init__(self, slot_options):
+        self.num_of_reels = 4
+        super().__init__(slot_options)
+
     def is_jackpot(self):
         return self.get_slots().count(self.get_slots()[0]) == self.get_num_of_reels()
     
