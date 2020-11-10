@@ -9,17 +9,14 @@ class FourReelsTurn:
             random.choice(slot_options)
         )
     
+    def is_jackpot(self):
+        return self.get_slots().count(self.get_slots()[0]) == self.get_num_of_slots()
+    
     def get_slots(self):
         return self.slots
     
-    def is_last_slot(self, index):
-        return index + 1 == len(self.get_slots())
-    
-    def is_one_occurrence(self, index):
-        return self.get_slots().count(self.get_slots()[index]) == 1
-
-    def is_jackpot(self):
-        return self.get_slots().count(self.get_slots()[0]) == len(self.get_slots())
+    def get_num_of_slots(self):
+        return len(self.get_slots())
     
     def is_one_of_each(self):
         def is_one_of_each_helper(self, i):
@@ -40,3 +37,9 @@ class FourReelsTurn:
             else:
                 return is_two_in_a_row_helper(self, i + 1)
         return is_two_in_a_row_helper(self, 0)
+    
+    def is_last_slot(self, index):
+        return index + 1 == self.get_num_of_slots()
+    
+    def is_one_occurrence(self, index):
+        return self.get_slots().count(self.get_slots()[index]) == 1
