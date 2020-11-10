@@ -10,7 +10,7 @@ slot_opts = (
 
 turn = FourReelsTurn(slot_opts)
 
-def test_turn_returns_4_black(monkeypatch):
+def test_turn_returns_same_slot_when_random_choice_mocked(monkeypatch):
     def mock_choice(x):
         return slot_opts[0]
 
@@ -22,6 +22,10 @@ def test_turn_returns_4_black(monkeypatch):
             slot_opts[0],
             slot_opts[0]
         )
+
+def test_turn_is_last_slot():
+    index_of_last_slot = len(turn.get_slots()) - 1
+    assert turn.is_last_slot(index_of_last_slot) == True
 
 def test_is_jackpot_when_slots_all_same_option(monkeypatch):
     def mock_get_slots():
