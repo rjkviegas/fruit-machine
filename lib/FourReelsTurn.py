@@ -10,26 +10,15 @@ class FruitMachineTurn:
         for reel in range(num_of_reels):
                 result.append(random.choice(slot_options))
         return tuple(result)
+
+    def is_jackpot(self):
+        return self.get_slots().count(self.get_slots()[0]) == self.get_num_of_reels()
     
     def get_slots(self):
         return self.slots
     
     def get_num_of_reels(self):
         return self.num_of_reels
-    
-    def is_last_slot(self, index):
-        return index + 1 == self.get_num_of_reels()
-    
-    def only_one_occurrence(self, index):
-        return self.get_slots().count(self.get_slots()[index]) == 1
-
-class FourReelsTurn(FruitMachineTurn):
-    def __init__(self, slot_options):
-        self.num_of_reels = 4
-        super().__init__(slot_options)
-
-    def is_jackpot(self):
-        return self.get_slots().count(self.get_slots()[0]) == self.get_num_of_reels()
     
     def is_one_of_each(self):
         def is_one_of_each_helper(self, i):
@@ -41,6 +30,12 @@ class FourReelsTurn(FruitMachineTurn):
                 return False
         return is_one_of_each_helper(self, 0)
     
+    def is_last_slot(self, index):
+        return index + 1 == self.get_num_of_reels()
+    
+    def only_one_occurrence(self, index):
+        return self.get_slots().count(self.get_slots()[index]) == 1
+    
     def is_two_in_a_row(self):
         def is_two_in_a_row_helper(self, i):
             if self.is_last_slot(i):
@@ -50,4 +45,9 @@ class FourReelsTurn(FruitMachineTurn):
             else:
                 return is_two_in_a_row_helper(self, i + 1)
         return is_two_in_a_row_helper(self, 0)
+
+class FourReelsTurn(FruitMachineTurn):
+    def __init__(self, slot_options):
+        self.num_of_reels = 4
+        super().__init__(slot_options)
     

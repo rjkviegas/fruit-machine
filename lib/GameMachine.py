@@ -1,6 +1,6 @@
 import random
 
-class FruitMachine:
+class GameMachine:
     def __init__(self, slot_opts, balance, fee, turnClass):
         self.slots = slot_opts
         self.balance = balance

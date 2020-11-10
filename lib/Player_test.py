@@ -1,5 +1,5 @@
 from Player import Player, InsufficientBalance
-from FruitMachine import FruitMachine
+from GameMachine import GameMachine
 from FourReelsTurn import FourReelsTurn
 import pytest, random
 
@@ -13,7 +13,7 @@ def test_when_no_prize_won(monkeypatch):
         return None
 
     player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee, FourReelsTurn)
+    fruit_machine = GameMachine(slot_options, fm_float, fee, FourReelsTurn)
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
@@ -25,7 +25,7 @@ def test_when_no_prize_won(monkeypatch):
 def test_player_raise_insuffcient_funds_error():
     with pytest.raises(InsufficientBalance):
         player = Player(0)
-        fruit_machine = FruitMachine(slot_options, fm_float, fee, FourReelsTurn)
+        fruit_machine = GameMachine(slot_options, fm_float, fee, FourReelsTurn)
 
         player.play(fruit_machine)
 
@@ -34,7 +34,7 @@ def test_jackpot_payout(monkeypatch):
         return 'black'
 
     player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee, FourReelsTurn)
+    fruit_machine = GameMachine(slot_options, fm_float, fee, FourReelsTurn)
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
@@ -55,7 +55,7 @@ def test_one_of_each_payout():
             return True
 
     player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee, MockFourReelsTurn)
+    fruit_machine = GameMachine(slot_options, fm_float, fee, MockFourReelsTurn)
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
@@ -77,7 +77,7 @@ def test_two_in_a_row_payout():
             return True
 
     player = Player(player_init_balance)
-    fruit_machine = FruitMachine(slot_options, fm_float, fee, MockFourReelsTurn)
+    fruit_machine = GameMachine(slot_options, fm_float, fee, MockFourReelsTurn)
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
