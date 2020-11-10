@@ -20,8 +20,9 @@ python3 -m pytest --cov lib/
 ```
 ## Notes
 - Overall I have enjoyed my first experience using Python
-- Enjoyed refactoring and encapsulating Turn logic into it's own class
+- Enjoyed refactoring and using polymorphism for the PrizeCalculator
 - Pleased with overall code coverage of 98%
+- Enjoyed using recursive function calls for checking the turn win conditions
 
 ## Design Plan
 
