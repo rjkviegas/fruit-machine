@@ -1,8 +1,8 @@
 class PrizeCalculator:
-    def __init__(self, aFourReelsTurn, aPlayer, aGame):
-        self.turn = aFourReelsTurn
-        self.player = aPlayer
-        self.game = aGame
+    def __init__(self, turn, player, game):
+        self.turn = turn
+        self.player = player
+        self.game = game
 
 class JackpotCalculator(PrizeCalculator):
     def payout_prize(self):
