@@ -15,7 +15,13 @@ Implement a basic machine, along with the concept of a player who has a fixed am
 Clone repo
 ```
 python3 -m pytest
+# with coverage
+python3 -m pytest --cov lib/
 ```
+## Notes
+- Overall I have enjoyed my first experience using Python
+- Enjoyed refactoring and encapsulating Turn logic into it's own class
+- Pleased with overall code coverage of 98%
 
 ## Design Plan
 
