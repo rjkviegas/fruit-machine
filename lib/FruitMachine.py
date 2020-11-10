@@ -17,4 +17,7 @@ class FruitMachine:
         return self.fee
 
     def play(self):
-        return self.turnClass(self.get_slots())
+        turn = self.turnClass(self.get_slots())
+        for reel in turn.get_slots():
+            print(reel)
+        return turn

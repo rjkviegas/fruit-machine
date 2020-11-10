@@ -25,10 +25,13 @@ class Player:
 
     def createPrizeCalculator(self, turn, player, game):
         if turn.is_jackpot():
+            print("You hit the jackpot!")
             return JackpotCalculator(turn, player, game)
         elif turn.is_one_of_each():
+            print("That's one of each!")
             return OneOfEachCalculator(turn, player, game)
         elif turn.is_two_in_a_row():
+            print("That's two in a row!")
             return TwoInARowCalculator(turn, player, game)
 
 class InsufficientBalance(ZeroDivisionError):

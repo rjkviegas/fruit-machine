@@ -11,7 +11,32 @@ If the colours in each slot are the same then the player wins the jackpot which 
 
 Implement a basic machine, along with the concept of a player who has a fixed amount of money to play the machine.
 
-## Test
+## Acceptance Criteria
+No acceptance criteria was provided however I created `example.py` to illustrate how the program would work.
+Below are some sample outputs of `example.py` being run:
+```
+white
+yellow
+green
+green
+That's two in a row!
+You won 5 x the fee amount!
+
+green
+yellow
+black
+white
+That's one of each!
+You won half the machine's total float!
+
+black
+green
+black
+green
+Sorry, no prize this time.
+```
+
+## Testing
 
 Clone repo
 ```
