@@ -7,7 +7,7 @@ class FruitMachineTurn:
 
     def generate_slots(self, slot_options, num_of_reels):
         result = list()
-        for x in range(num_of_reels):
+        for reel in range(num_of_reels):
                 result.append(random.choice(slot_options))
         return tuple(result)
     

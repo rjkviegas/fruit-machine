@@ -47,6 +47,8 @@ def test_one_of_each_payout():
     class MockFourReelsTurn:
         def __init__(self, x):
             pass
+        def get_slots(self):
+            return (),
         def is_jackpot(self):
             return False
         def is_one_of_each(self):
@@ -65,6 +67,8 @@ def test_two_in_a_row_payout():
     class MockFourReelsTurn:
         def __init__(self, x):
             pass
+        def get_slots(self):
+            return (),
         def is_jackpot(self):
             return False
         def is_one_of_each(self):

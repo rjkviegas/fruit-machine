@@ -9,20 +9,17 @@ class Player:
         return self.balance
     
     def play(self, game):
-        self.pay_for(game)
+        self.pay_fee_for(game)
         turn = game.play()
         calculator = self.createPrizeCalculator(turn, self, game)
-        try:
-            calculator.payout_prize()
-        except AttributeError:
-            print('Sorry, no prize this time.')
+        self.payout_prize_calculated_by(calculator)
     
-    def pay_for(self, game):
+    def pay_fee_for(self, game):
         if self.get_balance() < game.fee:
             raise InsufficientBalance('Insufficient balance to play')
         self.balance -= game.get_fee()
         game.balance += game.get_fee()
-
+    
     def createPrizeCalculator(self, turn, player, game):
         if turn.is_jackpot():
             print("You hit the jackpot!")
@@ -33,6 +30,12 @@ class Player:
         elif turn.is_two_in_a_row():
             print("That's two in a row!")
             return TwoInARowCalculator(turn, player, game)
+    
+    def payout_prize_calculated_by(self, calculator):
+        try:
+            calculator.payout_prize()
+        except AttributeError:
+            print('Sorry, no prize this time.')  
 
 class InsufficientBalance(ZeroDivisionError):
 	def __init__(self, msg):
