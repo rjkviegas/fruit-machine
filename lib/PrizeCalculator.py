@@ -1,23 +1,23 @@
 class PrizeCalculator:
-    def __init__(self, turn, player, game):
+    def __init__(self, turn, player, game_machine):
         self.turn = turn
         self.player = player
-        self.game = game
+        self.game_machine = game_machine
 
 class JackpotCalculator(PrizeCalculator):
     def payout_prize(self):
         print("You won all the money in the machine!")
-        self.player.balance += self.game.get_balance()
-        self.game.balance = 0
+        self.player.balance += self.game_machine.get_balance()
+        self.game_machine.balance = 0
 
 class OneOfEachCalculator(PrizeCalculator):
     def payout_prize(self):
         print("You won half the machine's total float!")
-        self.player.balance += self.game.get_balance() / 2
-        self.game.balance /= 2
+        self.player.balance += self.game_machine.get_balance() / 2
+        self.game_machine.balance /= 2
 
 class TwoInARowCalculator(PrizeCalculator):
     def payout_prize(self):
         print("You won 5 x the fee amount!")
-        self.player.balance += (self.game.get_fee() * 5)
-        self.game.balance -= (self.game.get_fee() * 5)
+        self.player.balance += (self.game_machine.get_fee() * 5)
+        self.game_machine.balance -= (self.game_machine.get_fee() * 5)

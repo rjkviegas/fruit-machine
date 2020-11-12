@@ -1,6 +1,3 @@
-from PrizeCalculator import PrizeCalculator, JackpotCalculator
-from PrizeCalculator import OneOfEachCalculator, TwoInARowCalculator
-
 class Player:  
     def __init__(self, balance):
         self.balance = balance
@@ -8,15 +5,15 @@ class Player:
     def get_balance(self):
         return self.balance
     
-    def play(self, game):
-        self.pay_fee_for(game)
-        game.play(self)
+    def play(self, game_machine):
+        self.pay_fee_for(game_machine)
+        game_machine.play(self)
     
-    def pay_fee_for(self, game):
-        if self.get_balance() < game.fee:
+    def pay_fee_for(self, game_machine):
+        if self.get_balance() < game_machine.fee:
             raise InsufficientBalance('Insufficient balance to play')
-        self.balance -= game.get_fee()
-        game.balance += game.get_fee() 
+        self.balance -= game_machine.get_fee()
+        game_machine.balance += game_machine.get_fee() 
 
 class InsufficientBalance(ZeroDivisionError):
 	def __init__(self, msg):
