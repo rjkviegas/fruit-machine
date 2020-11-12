@@ -1,14 +1,14 @@
-from PrizeCalculatorFactory import PrizeCalculatorFactory
+from PrizeFactory import DefaultPrizeFactory
 import random
 
 class GameMachine:
     def __init__(self, slot_opts, balance,
-                fee, turn_class, prize_calculator_factory_class):
+                fee, turn_class, prize_calculator_factory):
         self.slots = slot_opts
         self.balance = balance
         self.fee = fee
         self.turn_class = turn_class
-        self.prize_calculator_factory = prize_calculator_factory_class()
+        self.prize_calculator_factory = prize_calculator_factory()
     
     def get_slots(self):
         return self.slots

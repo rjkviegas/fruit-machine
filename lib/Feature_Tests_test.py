@@ -1,7 +1,7 @@
 from Player import Player, InsufficientBalance
 from GameMachine import GameMachine
 from FourReelsTurn import FourReelsTurn
-from PrizeCalculatorFactory import PrizeCalculatorFactory
+from PrizeFactory import DefaultPrizeFactory
 import pytest, random
 
 slot_options = ('test')
@@ -20,7 +20,7 @@ def test_no_prize_scenario(monkeypatch):
         game_machine_float,
         game_fee,
         FourReelsTurn,
-        PrizeCalculatorFactory
+        DefaultPrizeFactory
     )
 
     assert fruit_machine.get_balance() == game_machine_float
@@ -46,7 +46,7 @@ def test_player_has_insuffcient_funds_to_play():
             game_machine_float,
             game_fee,
             FourReelsTurn,
-            PrizeCalculatorFactory
+            DefaultPrizeFactory
         )
 
         assert player_with_sufficient_funds.get_balance() < fruit_machine.get_fee()
@@ -63,7 +63,7 @@ def test_jackpot_prize_payout(monkeypatch):
         game_machine_float,
         game_fee,
         FourReelsTurn,
-        PrizeCalculatorFactory
+        DefaultPrizeFactory
     )
 
     assert fruit_machine.get_balance() == game_machine_float
@@ -89,7 +89,7 @@ def test_one_of_each_prize_payout(monkeypatch):
         game_machine_float,
         game_fee,
         FourReelsTurn,
-        PrizeCalculatorFactory
+        DefaultPrizeFactory
     )
 
     assert fruit_machine.get_balance() == game_machine_float
@@ -116,7 +116,7 @@ def test_two_in_a_row_prize_payout(monkeypatch):
         game_machine_float,
         game_fee, 
         FourReelsTurn,
-        PrizeCalculatorFactory
+        DefaultPrizeFactory
     )
 
     assert fruit_machine.get_balance() == game_machine_float
@@ -125,7 +125,7 @@ def test_two_in_a_row_prize_payout(monkeypatch):
     monkeypatch.setattr(fruit_machine.prize_calculator_factory, 'is_jackpot', return_false)
     monkeypatch.setattr(fruit_machine.prize_calculator_factory, 'is_one_of_each', return_false)
     monkeypatch.setattr(fruit_machine.prize_calculator_factory, 'is_two_in_a_row', return_true)
-    
+
     player.play(fruit_machine)
     
     assert fruit_machine.get_balance() == (game_machine_float + game_fee) - (game_fee * 5)

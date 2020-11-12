@@ -1,11 +1,11 @@
-from PrizeCalculatorFactory import PrizeCalculatorFactory
+from PrizeFactory import DefaultPrizeFactory
 
-prizeCalculatorFactory = PrizeCalculatorFactory()
+prize_factory = DefaultPrizeFactory()
 
 def test_is_jackpot_when_slots_all_same_option(monkeypatch):
     jackpot = ('black',) *4
     
-    assert prizeCalculatorFactory.is_jackpot(jackpot) == True
+    assert prize_factory.is_jackpot(jackpot) == True
 
 def test_is_one_of_each_when_each_slot_option_once(monkeypatch):
     one_of_each = (
@@ -15,7 +15,7 @@ def test_is_one_of_each_when_each_slot_option_once(monkeypatch):
         'yellow'
     )
 
-    assert prizeCalculatorFactory.is_one_of_each(one_of_each) == True
+    assert prize_factory.is_one_of_each(one_of_each) == True
 
 def test_is_two_in_a_row(monkeypatch):
     two_in_a_row = (
@@ -25,5 +25,5 @@ def test_is_two_in_a_row(monkeypatch):
         'black'
     )
 
-    assert prizeCalculatorFactory.is_two_in_a_row(two_in_a_row) == True
+    assert prize_factory.is_two_in_a_row(two_in_a_row) == True
 
