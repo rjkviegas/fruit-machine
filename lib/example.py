@@ -1,6 +1,7 @@
 from Player import Player
 from GameMachine import GameMachine
 from FourReelsTurn import FourReelsTurn
+from PrizeCalculatorFactory import PrizeCalculatorFactory
 
 
 player_initial_balance = 10
@@ -20,7 +21,8 @@ fruit_machine = GameMachine(
     slot_opts, 
     game_machine_initial_balance,
     game_machine_fee,
-    FourReelsTurn
+    FourReelsTurn,
+    PrizeCalculatorFactory
 )
 
 print("Player intial balance: ", player.get_balance())

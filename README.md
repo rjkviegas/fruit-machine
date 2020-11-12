@@ -17,10 +17,7 @@ Below are some outputs from running `example.py`:
 ```
 Player intial balance:  10
 Fruit machine initial balance:  100
-white
-white
-white
-white
+[ 'white', 'white', 'white', 'white' ]
 You hit the jackpot!
 You won all the money in the machine!
 Player new balance:  110
@@ -28,10 +25,7 @@ Fruit machine:  0
 
 Player intial balance:  10
 Fruit machine initial balance:  100
-green
-yellow
-yellow
-yellow
+[ 'green', 'yellow', 'yellow', 'yellow' ]
 That's two in a row!
 You won 5 x the fee amount!
 Player new balance:  14
@@ -39,10 +33,7 @@ Fruit machine:  96
 
 Player intial balance:  10
 Fruit machine initial balance:  100
-green
-white
-yellow
-black
+[ 'green', 'white', 'yellow', 'black' ]
 That's one of each!
 You won half the machine's total float!
 Player new balance:  59.5
