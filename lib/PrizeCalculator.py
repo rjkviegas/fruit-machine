@@ -1,6 +1,5 @@
 class PrizeCalculator:
-    def __init__(self, turn, player, game_machine):
-        self.turn = turn
+    def __init__(self, player, game_machine):
         self.player = player
         self.game_machine = game_machine
 
