@@ -27,8 +27,8 @@ def test_no_prize_scenario(monkeypatch):
     assert player.get_balance() == player_initial_balance
 
     monkeypatch.setattr(
-        fruit_machine.prize_calculator_factory,
-        'create_prize_calculator',
+        fruit_machine.prize_factory,
+        'create_prize',
         losing_slots_combination
     )
     player.play(fruit_machine)
@@ -95,8 +95,8 @@ def test_one_of_each_prize_payout(monkeypatch):
     assert fruit_machine.get_balance() == game_machine_float
     assert player.get_balance() == player_initial_balance
 
-    monkeypatch.setattr(fruit_machine.prize_calculator_factory, 'is_jackpot', return_false)
-    monkeypatch.setattr(fruit_machine.prize_calculator_factory, 'is_one_of_each', return_true)
+    monkeypatch.setattr(fruit_machine.prize_factory, 'is_jackpot', return_false)
+    monkeypatch.setattr(fruit_machine.prize_factory, 'is_one_of_each', return_true)
 
     player.play(fruit_machine)
 
@@ -122,9 +122,9 @@ def test_two_in_a_row_prize_payout(monkeypatch):
     assert fruit_machine.get_balance() == game_machine_float
     assert player.get_balance() == player_initial_balance
 
-    monkeypatch.setattr(fruit_machine.prize_calculator_factory, 'is_jackpot', return_false)
-    monkeypatch.setattr(fruit_machine.prize_calculator_factory, 'is_one_of_each', return_false)
-    monkeypatch.setattr(fruit_machine.prize_calculator_factory, 'is_two_in_a_row', return_true)
+    monkeypatch.setattr(fruit_machine.prize_factory, 'is_jackpot', return_false)
+    monkeypatch.setattr(fruit_machine.prize_factory, 'is_one_of_each', return_false)
+    monkeypatch.setattr(fruit_machine.prize_factory, 'is_two_in_a_row', return_true)
 
     player.play(fruit_machine)
     
