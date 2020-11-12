@@ -1,6 +1,6 @@
 from Player import Player
 from GameMachine import GameMachine
-from FourReelsTurn import FourReelsTurn
+from TurnGenerator import FourReelsTurnGenerator
 from PrizeFactory import DefaultPrizeFactory
 
 
@@ -20,7 +20,7 @@ fruit_machine = GameMachine(
     slot_opts, 
     game_machine_initial_balance,
     game_machine_fee,
-    FourReelsTurn,
+    TurnGenerator,
     DefaultPrizeFactory
 )
 

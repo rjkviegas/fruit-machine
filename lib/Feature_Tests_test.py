@@ -1,6 +1,6 @@
 from Player import Player, InsufficientBalance
 from GameMachine import GameMachine
-from FourReelsTurn import FourReelsTurn
+from TurnGenerator import FourReelsTurnGenerator
 from PrizeFactory import DefaultPrizeFactory
 import pytest, random
 
@@ -19,7 +19,7 @@ def test_no_prize_scenario(monkeypatch):
         slot_options,
         game_machine_float,
         game_fee,
-        FourReelsTurn,
+        FourReelsTurnGenerator,
         DefaultPrizeFactory
     )
 
@@ -45,7 +45,7 @@ def test_player_has_insuffcient_funds_to_play():
             slot_options,
             game_machine_float,
             game_fee,
-            FourReelsTurn,
+            FourReelsTurnGenerator,
             DefaultPrizeFactory
         )
 
@@ -62,7 +62,7 @@ def test_jackpot_prize_payout(monkeypatch):
         slot_options,
         game_machine_float,
         game_fee,
-        FourReelsTurn,
+        FourReelsTurnGenerator,
         DefaultPrizeFactory
     )
 
@@ -88,7 +88,7 @@ def test_one_of_each_prize_payout(monkeypatch):
         slot_options,
         game_machine_float,
         game_fee,
-        FourReelsTurn,
+        FourReelsTurnGenerator,
         DefaultPrizeFactory
     )
 
@@ -115,7 +115,7 @@ def test_two_in_a_row_prize_payout(monkeypatch):
         slot_options,
         game_machine_float,
         game_fee, 
-        FourReelsTurn,
+        FourReelsTurnGenerator,
         DefaultPrizeFactory
     )
 

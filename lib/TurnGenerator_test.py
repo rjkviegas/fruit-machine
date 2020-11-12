@@ -1,4 +1,4 @@
-from FourReelsTurn import FourReelsTurn
+from TurnGenerator import FourReelsTurnGenerator
 import random
 
 slot_opts = (
@@ -13,7 +13,7 @@ def test_turn_returns_same_slot_when_random_choice_mocked(monkeypatch):
         return slot_opts[0]
 
     monkeypatch.setattr(random, 'choice', mock_choice)
-    x = FourReelsTurn(slot_opts).get_slots()
+    x = FourReelsTurnGenerator(slot_opts).get_slots()
     assert x == (
             slot_opts[0],
             slot_opts[0],
