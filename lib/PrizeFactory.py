@@ -1,9 +1,6 @@
 from Prize import Prize, JackpotPrize, OneOfEachPrize, TwoInARowPrize
 
 class PrizeFactory:
-    def create_prize(self, turn, player, game_machine):
-            pass
-    
     def is_jackpot(self, slots_tup):
         return slots_tup.count(slots_tup[0]) == len(slots_tup)
     

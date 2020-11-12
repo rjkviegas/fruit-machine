@@ -1,6 +1,6 @@
-from PrizeFactory import DefaultPrizeFactory
+from PrizeFactory import PrizeFactory, DefaultPrizeFactory
 
-prize_factory = DefaultPrizeFactory()
+prize_factory = PrizeFactory()
 
 def test_is_jackpot_when_slots_all_same_option(monkeypatch):
     jackpot = ('black',) *4
@@ -26,4 +26,3 @@ def test_is_two_in_a_row(monkeypatch):
     )
 
     assert prize_factory.is_two_in_a_row(two_in_a_row) == True
-
