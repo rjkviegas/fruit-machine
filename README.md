@@ -47,10 +47,9 @@ Fruit machine:  50.5
 
 Player intial balance:  10
 Fruit machine initial balance:  100
-black
-yellow
-white
-yellow
+Player pays the fee and pulls the lever
+Slots returned are:
+[ 'black', 'yellow', 'white', 'yellow' ]
 Sorry, no prize this time.
 Player new balance:  9
 Fruit machine:  101
@@ -66,8 +65,8 @@ python3 -m pytest --cov lib/
 ```
 ## Notes
 - Overall I have enjoyed my first experience using Python
-- Enjoyed refactoring and using polymorphism for the PrizeCalculator
-- Pleased with overall code coverage of 98%
+- Enjoyed refactoring, using polymorphism and a Factory Method for the PrizeCalculatorprize calculaton
+- Pleased with overall code coverage of 90+%
 - Enjoyed using recursive calls for checking the win conditions
 - Enjoyed using `super` in constructor in FourReelsTurn class
 
