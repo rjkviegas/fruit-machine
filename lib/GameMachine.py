@@ -2,7 +2,8 @@ from PrizeCalculatorFactory import PrizeCalculatorFactory
 import random
 
 class GameMachine:
-    def __init__(self, slot_opts, balance, fee, turnClass, prizeCalculatorFactory):
+    def __init__(self, slot_opts, balance,
+                fee, turnClass, prizeCalculatorFactory):
         self.slots = slot_opts
         self.balance = balance
         self.fee = fee
