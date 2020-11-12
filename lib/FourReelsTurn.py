@@ -2,8 +2,7 @@ import random
 
 class FruitMachineTurn:
     def __init__(self, slot_options):
-        self.num_of_reels = len(slot_options)
-        self.slots = self.generate_slots(slot_options, self.num_of_reels)
+        self.slots = self.generate_slots(slot_options, len(slot_options))
 
     def generate_slots(self, slot_options, num_of_reels):
         result = list()
@@ -18,5 +17,5 @@ class FruitMachineTurn:
 class FourReelsTurn(FruitMachineTurn):
     def __init__(self, slot_options):
         self.num_of_reels = 4
-        super().__init__(slot_options)
+        self.slots = self.generate_slots(slot_options, self.num_of_reels)
     
