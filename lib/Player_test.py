@@ -17,7 +17,7 @@ def test_when_no_prize_won(monkeypatch):
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
-    monkeypatch.setattr(player, 'createPrizeCalculator', return_none)
+    monkeypatch.setattr(fruit_machine, 'createPrizeCalculator', return_none)
     player.play(fruit_machine)
     assert fruit_machine.get_balance() == fm_float + fee
     assert player.get_balance() == player_init_balance - fee
