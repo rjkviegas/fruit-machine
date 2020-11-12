@@ -24,11 +24,11 @@ class GameMachine:
 
     def play(self, player):
         turn = self.turn_class(self.get_slots())
-        calculator = self.get_prize_factory().create_prize(turn, player, self)
-        self.payout_prize_calculated_by(calculator)
+        prize = self.get_prize_factory().create_prize(turn, player, self)
+        self.payout(prize)
     
-    def payout_prize_calculated_by(self, calculator):
+    def payout(self, prize):
         try:
-            calculator.payout_prize()
+            prize.payout_to_player()
         except AttributeError:
             print('Sorry, no prize this time.') 
