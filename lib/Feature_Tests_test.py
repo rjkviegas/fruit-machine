@@ -51,49 +51,44 @@ def test_jackpot_payout(monkeypatch):
     assert fruit_machine.get_balance() == 0
     assert player.get_balance() == player_init_balance + fm_float
 
-def test_one_of_each_payout():
-    class MockFourReelsTurn:
-        def __init__(self, x):
-            pass
-        def get_slots(self):
-            return (),
-        def is_jackpot(self):
-            return False
-        def is_one_of_each(self):
-            return True
+def test_one_of_each_payout(monkeypatch):
+    def return_false(x):
+        return False
+    
+    def return_true(x):
+        return True
 
     player = Player(player_init_balance)
     fruit_machine = GameMachine(slot_options, fm_float, fee,
-                                MockFourReelsTurn, PrizeCalculatorFactory)
+                                FourReelsTurn, PrizeCalculatorFactory)
 
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
+    monkeypatch.setattr(fruit_machine.prizeCalculatorFactory, 'is_jackpot', return_false)
+    monkeypatch.setattr(fruit_machine.prizeCalculatorFactory, 'is_one_of_each', return_true)
     player.play(fruit_machine)
 
     assert fruit_machine.get_balance() == (fm_float + fee) / 2
     assert player.get_balance() == player_init_balance - fee + ((fm_float + fee) / 2)
 
-def test_two_in_a_row_payout():
-    class MockFourReelsTurn:
-        def __init__(self, x):
-            pass
-        def get_slots(self):
-            return (),
-        def is_jackpot(self):
-            return False
-        def is_one_of_each(self):
-            return False
-        def is_two_in_a_row(self):
-            return True
+def test_two_in_a_row_payout(monkeypatch):
+    def return_false(x):
+        return False
+    
+    def return_true(x):
+        return True
 
     player = Player(player_init_balance)
     fruit_machine = GameMachine(slot_options, fm_float, fee, 
-                                MockFourReelsTurn, PrizeCalculatorFactory)
+                                FourReelsTurn, PrizeCalculatorFactory)
 
     assert fruit_machine.get_balance() == fm_float
     assert player.get_balance() == player_init_balance
 
+    monkeypatch.setattr(fruit_machine.prizeCalculatorFactory, 'is_jackpot', return_false)
+    monkeypatch.setattr(fruit_machine.prizeCalculatorFactory, 'is_one_of_each', return_false)
+    monkeypatch.setattr(fruit_machine.prizeCalculatorFactory, 'is_two_in_a_row', return_true)
     player.play(fruit_machine)
     
     assert fruit_machine.get_balance() == (fm_float + fee) - (fee * 5)
