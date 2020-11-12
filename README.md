@@ -37,10 +37,9 @@ Fruit machine:  0
 
 ## Notes
 - Overall I have enjoyed my first experience using Python
-- Enjoyed refactoring, using polymorphism and a Factory Method for the PrizeCalculatorprize calculaton
-- Pleased with overall code coverage of 90+%
-- Enjoyed using recursive calls for checking the win conditions
-- Enjoyed using `super` in constructor in FourReelsTurn class
+- Enjoyed refactoring, using polymorphism and a Factory Method for the prize calculation
+- Pleased with overall code coverage of 90+% and can now more thoroughly test (unit)
+- Enjoyed using recursion for checking the win conditions of the turns
 
 ## Design Plan
 
